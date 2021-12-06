@@ -1,0 +1,3 @@
+[submodule "kopf/kopf"]
+	path = kopf/kopf
+	url = https://github.com/nolar/kopf.git
