@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<input form="back" type="submit" value="Back" />
+<input form="new" type="submit" value="New Item" />
+
+
+<form id="back" action="{% url 'timon:main_view' %}" />
+<form id="new" action="{% url 'timon:deployment_create_view' %}" />
+
+
+<h1>Deployments</h1>
+
+
+{% if terraform_deployment_list %}
+<table border=0px width=100% class="table table-striped">
+  <thead >
+    <td>ID</td>
+    <td>Name</td>
+    <td>Comment</td>
+    <td>Apply Date</td>
+    <td>Destroy Date</td>
+    <td>Username</td>
+  </thead>
+  <tbody>
+    {% for deployment in terraform_deployment_list %}
+        <td>{{ deployment.id }}</td>
+        <td><a href="{{ deployment.get_absolute_url }}">{{ deployment.name }}</a></td>
+        <td>{{ deployment.comment }}</td>
+        <td>{{ deployment.apply_date|date:'Y-m-d H:i:s' }}</td>
+        <td>{{ deployment.destroy_date|date:'Y-m-d H:i:s' }}</td>
+        <td>{{ deployment.username }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No Terraform deployments available.</p>
+{% endif %}
+{% endblock %}

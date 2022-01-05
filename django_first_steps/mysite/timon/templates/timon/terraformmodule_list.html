@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<input form="back" type="submit" value="Back" />
+<input form="new" type="submit" value="New Item" />
+
+
+<form id="back" action="{% url 'timon:main_view' %}" />
+<form id="new" action="{% url 'timon:module_create_view' %}" />
+
+
+<h1>Modules</h1>
+
+
+{% if terraform_module_list %}
+<table border=0px width=100% class="table table-striped">
+  <thead >
+    <td>ID</td>
+    <td>Name</td>
+    <td>Path</td>
+    <td>Creation Date</td>
+    <td>Deletion Date</td>
+    <td>Useable</td>
+  </thead>
+  <tbody>
+    {% for module in terraform_module_list %}
+        <td>{{ module.id }}</td>
+        <td><a href="{{ module.get_absolute_url }}">{{ module.name }}</a></td>
+        <td>{{ module.path }}</td>
+        <td>{{ module.creation_date|date:'Y-m-d H:i:s' }}</td>
+        <td>{{ module.deletion_date|date:'Y-m-d H:i:s' }}</td>
+        <td>{{ module.is_useable }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No Terraform modules available.</p>
+{% endif %}
+{% endblock %}
