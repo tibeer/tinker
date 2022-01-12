@@ -1,35 +1,25 @@
-# Model
+# Timon
 
 Missing functionality:
-- [ ] update deployment details
-- [ ] during deployment creating assign deployment details
-- [ ] base-data terraform params
-- [ ] creating new "terraform params" <-> "terraform module" associations
-- [ ] creating new "deployment param"
 
-Tables:
-
-- tf_module
-  - name
-  - path
-  - creation_date
-  - deletion_date
-  - is_useable
-- param
-  - name
-  - description
-  - type # bool, string, number, list, touple, map, object, null
-- module_params
-  - fk:module_id
-  - fk:param_id
-- deployment
-  - fk:module_id
-  - name
-  - comment
-  - apply_date
-  - destroy_date
-  - username
-- deployment_param
-  - fk:deployment_id
-  - fk:param_id
-  - value
+- [ ] terraform wrapper - terraform pieces
+- [x] provider selection
+  - [x] secrets
+- [x] prevent duplicate module-params
+- [x] recheck datatype validation
+- [ ] s3 for state
+  - [ ] states should never be deleted, even after successul deployment
+  - [ ] s3-versioning will be required
+- [ ] tf-modules should work via git
+  - [ ] remote-backend will be dynamic
+    - [ ] execution environment
+  - [ ] py-git
+  - [ ] never do checkouts (maybe inside the container later)
+  - [ ] Django should trigger a container build when a deployment is created. this container is an exact replication of this deployment (including terraform binary, git code, ansible, etc.)
+  - [ ] TF_VAR_secret
+- [ ] no scaling of deployments at first (later for sure)
+- [ ] integrations
+  - [ ] terraform should be implemented in a way, that it can be replaced
+  - [ ] ansible, etc., shall not be triggered via terraform
+  - [ ] outputs shall be read/used from the S3 state
+  - [ ] user management is something for v2

@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<input form="back" type="submit" value="Back" />
+<input form="new" type="submit" value="New Item" />
+
+
+<form id="back" action="{% url 'timon:main_view' %}"></form>
+<form id="new" action="{% url 'timon:param_create_view' %}"></form>
+
+
+<h1>Parameters</h1>
+
+
+{% if terraform_param_list %}
+<table border=0px width=100% class="table table-striped">
+  <thead >
+    <td>ID</td>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Type</td>
+  </thead>
+  <tbody>
+    {% for param in terraform_param_list %}
+        <td>{{ param.id }}</td>
+        <td><a href="{{ param.get_absolute_url }}">{{ param.name }}</a></td>
+        <td>{{ param.description }}</td>
+        <td>{{ param.type }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No Terraform parameters available.</p>
+{% endif %}
+{% endblock %}

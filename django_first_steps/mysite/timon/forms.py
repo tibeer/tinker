@@ -1,7 +1,17 @@
-from django import forms
-from django.utils import timezone
+from django.forms import ModelForm, PasswordInput
+# flake8: noqa
+from .models import *
 
 
-#class UpdateDeploymentForm(forms.Form):
-#    name = forms.CharField(label="Name", max_length=255)
-#    comment = forms.CharField(label="Comment", max_length=255)
+class ProviderCreateForm(ModelForm):
+    class Meta:
+        model = Provider
+        fields = ['name', 'username', 'password']
+        widgets = {'password': PasswordInput(),}
+
+
+class ProviderUpdateForm(ModelForm):
+    class Meta:
+        model = Provider
+        fields = ['name', 'username', 'password']
+        widgets = {'password': PasswordInput(),}

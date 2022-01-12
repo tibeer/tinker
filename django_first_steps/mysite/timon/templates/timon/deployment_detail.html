@@ -2,15 +2,18 @@
 
 {% block content %}
 <input form="back" type="submit" value="Back" />
+{% if object.apply_date == object.destroy_date %}
 <input form="update" type="submit" value="Update" />
 <input form="delete" type="submit" value="Delete" />
+{% endif %}
 
-
-<form id="back" action="{% url 'timon:deployment_list_view' %}" />
-<form id="update" action="{% url 'timon:deployment_update_view' object.id %}" />
+<form id="back" action="{% url 'timon:deployment_list_view' %}"></form>
+{% if object.apply_date == object.destroy_date %}
+<form id="update" action="{% url 'timon:deployment_update_view' object.id %}"></form>
 <form id="delete" action="{% url 'timon:deployment_delete_view' object.id %}" method="post">
   {% csrf_token %}
 </form>
+{% endif %}
 
 
 <h1>Detail View</h1>

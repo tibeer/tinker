@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<input form="back" type="submit" value="Back" />
+<input form="update" type="submit" value="Update" />
+<input form="delete" type="submit" value="Delete" />
+
+
+<form id="back" action="{% url 'timon:deployparam_list_view' %}"></form>
+<form id="update" action="{% url 'timon:deployparam_update_view' object.id %}"></form>
+<form id="delete" action="{% url 'timon:deployparam_delete_view' object.id %}" method="post">
+  {% csrf_token %}
+</form>
+
+
+<h1>Detail View</h1>
+
+
+<h3>Deployment Param Overview</h3>
+<table border=1 width=100%>
+  <thead>
+    <th>Field</th>
+    <th>Value</th>
+  </thead>
+  <tbody>
+    {% for entry in overview %}
+      <tr>
+        <td>{{ entry.field }}</td>
+        <td>{{ entry.value }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

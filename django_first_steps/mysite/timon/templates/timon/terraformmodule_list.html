@@ -5,8 +5,8 @@
 <input form="new" type="submit" value="New Item" />
 
 
-<form id="back" action="{% url 'timon:main_view' %}" />
-<form id="new" action="{% url 'timon:module_create_view' %}" />
+<form id="back" action="{% url 'timon:main_view' %}"></form>
+<form id="new" action="{% url 'timon:module_create_view' %}"></form>
 
 
 <h1>Modules</h1>
@@ -28,7 +28,11 @@
         <td><a href="{{ module.get_absolute_url }}">{{ module.name }}</a></td>
         <td>{{ module.path }}</td>
         <td>{{ module.creation_date|date:'Y-m-d H:i:s' }}</td>
-        <td>{{ module.deletion_date|date:'Y-m-d H:i:s' }}</td>
+        <td>
+          {% if module.creation_date != module.deletion_date %}
+            {{ module.deletion_date|date:'Y-m-d H:i:s' }}
+          {% endif %}
+        </td>
         <td>{{ module.is_useable }}</td>
       </tr>
     {% endfor %}

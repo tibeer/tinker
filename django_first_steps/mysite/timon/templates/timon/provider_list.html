@@ -1,0 +1,37 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<input form="back" type="submit" value="Back" />
+<input form="new" type="submit" value="New Item" />
+
+
+<form id="back" action="{% url 'timon:main_view' %}"></form>
+<form id="new" action="{% url 'timon:provider_create_view' %}"></form>
+
+
+<h1>Providers</h1>
+
+
+{% if tf_provider_list %}
+<table border=0px width=100% class="table table-striped">
+  <thead >
+    <td>ID</td>
+    <td>Name</td>
+    <td>Username</td>
+    <td>Password</td>
+  </thead>
+  <tbody>
+    {% for provider in tf_provider_list %}
+        <td>{{ provider.id }}</td>
+        <td><a href="{{ provider.get_absolute_url }}">{{ provider.name }}</a></td>
+        <td>{{ provider.username }}</td>
+        <!--<td>{{ provider.password }}</td>-->
+        <td>*****</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No Providers available.</p>
+{% endif %}
+{% endblock %}

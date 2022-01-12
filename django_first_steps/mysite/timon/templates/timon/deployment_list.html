@@ -5,8 +5,8 @@
 <input form="new" type="submit" value="New Item" />
 
 
-<form id="back" action="{% url 'timon:main_view' %}" />
-<form id="new" action="{% url 'timon:deployment_create_view' %}" />
+<form id="back" action="{% url 'timon:main_view' %}"></form>
+<form id="new" action="{% url 'timon:deployment_create_view' %}"></form>
 
 
 <h1>Deployments</h1>
@@ -28,7 +28,11 @@
         <td><a href="{{ deployment.get_absolute_url }}">{{ deployment.name }}</a></td>
         <td>{{ deployment.comment }}</td>
         <td>{{ deployment.apply_date|date:'Y-m-d H:i:s' }}</td>
-        <td>{{ deployment.destroy_date|date:'Y-m-d H:i:s' }}</td>
+        <td>
+          {% if deployment.apply_date != deployment.destroy_date %}
+            {{ deployment.destroy_date|date:'Y-m-d H:i:s' }}
+          {% endif %}
+        </td>
         <td>{{ deployment.username }}</td>
       </tr>
     {% endfor %}
