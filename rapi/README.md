@@ -1,3 +1,0 @@
-# Rust API testing
-
-foobar
