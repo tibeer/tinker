@@ -1,0 +1,18 @@
+---
+services:
+  proxy:
+    restart: unless-stopped
+    image: caddy:latest
+    ports:
+      - 4010:80
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - prism
+  prism:
+    restart: unless-stopped
+    init: true
+    image: stoplight/prism:4
+    command: mock -h 0.0.0.0 "/tmp/api.yaml"
+    volumes:
+      - ./Kunden_v01.yaml:/tmp/api.yaml:ro 

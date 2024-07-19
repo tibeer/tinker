@@ -1,0 +1,6 @@
+http://localhost
+
+route /Kunden/01/* {
+  uri strip_prefix /Kunden/01
+  reverse_proxy prism:4010
+}
