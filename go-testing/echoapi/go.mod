@@ -4,7 +4,7 @@ go 1.21.4
 
 require (
 	github.com/labstack/echo/v5 v5.3.1
-	github.com/mvrilo/go-redoc v0.1.4
+	github.com/mvrilo/go-redoc v0.1.5
 )
 
 require (
